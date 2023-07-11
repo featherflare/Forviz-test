@@ -6,6 +6,7 @@ body {
   background: #b9bdc8;
 }
 
+/* Font Style */
 .header1 {
   font-family: Roboto;
   font-size: 54px;
@@ -63,6 +64,7 @@ body {
   line-height: 100%;
 }
 
+/* Background Style */
 .bglightblue {
   background: #2ebaee;
   box-shadow: 0px 4px 32px 0px rgba(57, 64, 111, 0.25);
@@ -78,6 +80,7 @@ body {
   background: #f7f7f7;
 }
 
+/* Font color Style */
 .fontwhite {
   color: white;
 }
@@ -99,6 +102,7 @@ body {
   color: #787878;
 }
 
+/* Margin and Padding Style */
 .margin1 {
   margin: 0 0 4% 0;
 }
@@ -135,6 +139,7 @@ body {
   padding: 15% 12% 2% 12%;
 }
 
+/* Flex Style */
 .flex {
   display: flex;
   position: relative;
@@ -144,6 +149,7 @@ body {
   gap: 8%;
 }
 
+/* Bar under nav Style */
 .active {
   background: #707fdd;
   box-shadow: 0px -1px 16px 0px rgba(112, 127, 221, 0.75);
@@ -155,6 +161,7 @@ body {
   transition: 0.3s;
 }
 
+/* Layout Style */
 .container {
   background: #efeeec;
   margin: 5%;
@@ -197,6 +204,7 @@ body {
   background: #ececec;
 }
 
+/* Color dot Style */
 [d-color='#3DC7D2']::after {
   background: #3dc7d2;
 }

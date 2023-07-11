@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import moment from 'moment';
 
 const RoomSchedule = () => {
   const ref1 = useRef();
@@ -8,6 +7,7 @@ const RoomSchedule = () => {
   const ref4 = useRef();
   const boxref = useRef();
 
+  // mock up data
   const schedule = [
     {
       date: { DDD: 'Monday', mmyyyy: '28 Sep' },
@@ -46,6 +46,7 @@ const RoomSchedule = () => {
     },
   ];
 
+  // set start bar under navbar
   useEffect(() => {
     ref4.current.style.left =
       boxref.current.offsetWidth * 0.09 + ref1.current.offsetWidth / 2 + 'px';
