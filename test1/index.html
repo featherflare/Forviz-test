@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Image Tile</title>
+    <style>
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 4%;
+      }
+
+      .header {
+        margin: 2% 0 1.5% 0;
+      }
+
+      .image-tile {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: -4px;
+      }
+
+      .image-tile img {
+        height: 150px;
+        margin: 4px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        Everyone's photos<span style="float: right"
+          ><a class="count" href="https://picsum.photos/v2/list"></a
+        ></span>
+      </div>
+      <div class="image-tile">
+        <!-- Images will be dynamically added here -->
+      </div>
+    </div>
+
+    <script>
+      // Fetch images from the API
+      fetch('https://picsum.photos/v2/list')
+        .then((response) => response.json())
+        .then((data) => {
+          const imageTile = document.querySelector('.image-tile');
+
+          let count = data.length;
+          console.log(data);
+          const viewEl = document.querySelector('.count');
+          viewEl.innerHTML = 'View all ' + count;
+
+          data.slice(0, 30).forEach((image) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = image.download_url;
+
+            imageTile.appendChild(imgElement);
+          });
+        });
+    </script>
+  </body>
+</html>

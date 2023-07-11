@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Room Events</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <h1>Room Events</h1>
+
+    <div id="events-container">
+      <h2 id="room-name"></h2>
+      <div id="daily-events"></div>
+      <div id="weekly-events"></div>
+      <div id="monthly-events"></div>
+    </div>
+
+    <script>
+      // Function to parse the query parameters from the URL
+      function getQueryParams(url) {
+        const params = {};
+        const paramsString = url.split('?')[1];
+
+        if (!paramsString) {
+          return params;
+        }
+
+        const keyValuePairs = paramsString.split('&');
+
+        keyValuePairs.forEach((pair) => {
+          const [key, value] = pair.split('=');
+          params[key] = decodeURIComponent(value);
+        });
+
+        return params;
+      }
+
+      // Function to fetch events data based on roomId
+      function fetchEvents(roomId) {
+        // Replace this with your actual API call to fetch events data based on the roomId
+        const eventsData = {
+          A101: {
+            daily: [
+              { id: 1, name: 'Event 1', date: '2023-07-11' },
+              { id: 2, name: 'Event 2', date: '2023-07-11' },
+            ],
+            weekly: [
+              { id: 3, name: 'Event 3', date: '2023-07-11' },
+              { id: 4, name: 'Event 4', date: '2023-07-18' },
+            ],
+            monthly: [
+              { id: 5, name: 'Event 5', date: '2023-07-11' },
+              { id: 6, name: 'Event 6', date: '2023-07-18' },
+              { id: 7, name: 'Event 7', date: '2023-07-25' },
+            ],
+          },
+          // Add more room events data as needed
+        };
+
+        return eventsData[roomId] || null;
+      }
+
+      // Function to render events data on the page
+      function renderEvents(events) {
+        const roomNameElement = document.getElementById('room-name');
+        const dailyEventsElement = document.getElementById('daily-events');
+        const weeklyEventsElement = document.getElementById('weekly-events');
+        const monthlyEventsElement = document.getElementById('monthly-events');
+
+        roomNameElement.textContent = `Room: ${events.roomId}`;
+
+        if (!events) {
+          dailyEventsElement.textContent = 'No events found.';
+          weeklyEventsElement.textContent = 'No events found.';
+          monthlyEventsElement.textContent = 'No events found.';
+          return;
+        }
+
+        // Render daily events
+        if (events.daily.length > 0) {
+          dailyEventsElement.innerHTML = '<h3>Daily Events:</h3>';
+
+          events.daily.forEach((event) => {
+            const eventElement = document.createElement('div');
+            eventElement.textContent = `${event.name} - ${event.date}`;
+            dailyEventsElement.appendChild(eventElement);
+          });
+        } else {
+          dailyEventsElement.textContent = 'No daily events found.';
+        }
+
+        // Render weekly events
+        if (events.weekly.length > 0) {
+          weeklyEventsElement.innerHTML = '<h3>Weekly Events:</h3>';
+
+          events.weekly.forEach((event) => {
+            const eventElement = document.createElement('div');
+            eventElement.textContent = `${event.name} - ${event.date}`;
+            weeklyEventsElement.appendChild(eventElement);
+          });
+        } else {
+          weeklyEventsElement.textContent = 'No weekly events found.';
+        }
+
+        // Render monthly events
+        if (events.monthly.length > 0) {
+          monthlyEventsElement.innerHTML = '<h3>Monthly Events:</h3>';
+
+          events.monthly.forEach((event) => {
+            const eventElement = document.createElement('div');
+            eventElement.textContent = `${event.name} - ${event.date}`;
+            monthlyEventsElement.appendChild(eventElement);
+          });
+        } else {
+          monthlyEventsElement.textContent = 'No monthly events found.';
+        }
+      }
+
+      // Get the query parameters from the URL
+      const queryParams = getQueryParams(window.location.search);
+
+      // Check if roomId is provided in the query parameters
+      if (queryParams.roomId) {
+        const roomId = queryParams.roomId;
+
+        // Fetch events data based on the roomId
+        const events = fetchEvents(roomId);
+
+        // Render events data on the page
+        renderEvents(events);
+      } else {
+        // If roomId is not provided, display an error message
+        const eventsContainer = document.getElementById('events-container');
+        eventsContainer.textContent = 'Error: RoomId not provided in the URL.';
+      }
+    </script>
+  </body>
+</html>
